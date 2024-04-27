@@ -1,5 +1,4 @@
-import { Button, Paper } from '@mui/material'
-import Empire from '@/assets/Empire.webp'
+import { Box, Button, Paper, Typography } from '@mui/material'
 import { ITicketData } from '@/types/types.ts'
 import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive'
 import { format } from 'date-fns'
@@ -9,98 +8,85 @@ type Props = {
     id?: number
     ticket: ITicketData
     selectedFilters: string[]
+    currency: string
 }
 
-const TicketCard = ({ id, ticket, selectedFilters }: Props) => {
+const TicketCard = ({ id, ticket, currency }: Props) => {
     return (
-        <Paper
-            elevation={1}
-            key={typeof id === 'number' ? id : 0}
-            sx={{ p: 3, display: 'flex', mb: 3 }}
-        >
-            <div
-                className="flexColumn"
-                style={{
+        <Paper elevation={5} key={id} className="ticket__card">
+            <Box
+                className="flex-column mb-1"
+                sx={{
                     gap: '25px',
-                    paddingRight: '50px',
                 }}
             >
-                <img src={Empire} alt="Empire" width={200} />
+                <img src={ticket.logo} alt="companyLogo" width={200} />
                 <Button
                     variant="contained"
                     color="warning"
                     size="large"
                     sx={{ px: 5, py: 1 }}
                 >
-                    Купить за {ticket.price}
+                    Купить за{' '}
+                    {currency === 'eur'
+                        ? `${(ticket.price * 0.01).toFixed(2)}€`
+                        : currency === 'usd'
+                          ? `${(ticket.price * 0.011).toFixed(2)}$`
+                          : `${ticket.price}₽`}
                 </Button>
-            </div>
-            <div
-                style={{
+            </Box>
+            <Box
+                sx={{
                     display: 'flex',
                     gap: '20px',
                 }}
             >
-                <div
-                    className="flexColumn"
+                <Box
+                    className="flex-column"
                     style={{
-                        justifyContent: 'space-between',
+                        justifyContent: 'center',
                         alignItems: 'start',
                     }}
                 >
-                    <p style={{ fontSize: '48px' }}>{ticket.departure_time}</p>
-                    <p>
+                    <Typography sx={{ fontSize: '48px' }}>
+                        {ticket.departure_time}
+                    </Typography>
+                    <Typography>
                         {ticket.origin}, {ticket.origin_name}
-                    </p>
-                    <p>
+                    </Typography>
+                    <Typography>
                         {format(ticket.departure_date, 'PP', {
                             locale: ru,
                         })}
-                    </p>
-                </div>
-                <div
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        width: '200px',
-                        position: 'relative',
-                    }}
-                >
-                    <span
-                        style={{
-                            backgroundColor: 'black',
-                            height: '2px',
-                            width: '100%',
-                        }}
-                    ></span>
-                    <AirplanemodeActiveIcon
-                        sx={{ rotate: '90deg' }}
-                        style={{
-                            position: 'absolute',
-                            top: '50%',
-                            right: '-5px',
-                            transform: 'translate(-50%, 0%)',
-                        }}
-                    />
-                </div>
-                <div
-                    className="flexColumn"
-                    style={{
-                        justifyContent: 'space-between',
+                    </Typography>
+                </Box>
+                <Box className="airplane__icon-container">
+                    <Box className="airplane__icon-solid-line" />
+                    <Typography className="airplane__stops__count">
+                        Пересадки: {ticket.stops}
+                    </Typography>
+                    <AirplanemodeActiveIcon className="airplane__icon" />
+                </Box>
+                <Box
+                    className="flex-column"
+                    sx={{
+                        justifyContent: 'center',
                         alignItems: 'end',
                     }}
                 >
-                    <p style={{ fontSize: '48px' }}>{ticket.departure_time}</p>
-                    <p>
+                    <Typography sx={{ fontSize: '48px' }}>
+                        {ticket.arrival_time}
+                    </Typography>
+                    <Typography>
                         {ticket.destination}, {ticket.destination_name}
-                    </p>
-                    <p>
+                    </Typography>
+                    <Typography>
                         {format(ticket.arrival_date, 'PP', {
                             locale: ru,
                         })}
-                    </p>
-                </div>
-            </div>
+                    </Typography>
+                </Box>
+            </Box>
         </Paper>
     )
 }

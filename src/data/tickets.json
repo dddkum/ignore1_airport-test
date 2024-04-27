@@ -11,7 +11,8 @@
             "arrival_time": "22:10",
             "carrier": "TK",
             "stops": 3,
-            "price": 12400
+            "price": 12400,
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/5/52/Caribbean_Airlines_logo.png"
         },
         {
             "origin": "VVO",
@@ -24,7 +25,8 @@
             "arrival_time": "23:50",
             "carrier": "S7",
             "stops": 1,
-            "price": 13100
+            "price": 13100,
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Air_Andorra_logo.png"
         },
         {
             "origin": "VVO",
@@ -37,7 +39,8 @@
             "arrival_time": "18:10",
             "carrier": "SU",
             "stops": 0,
-            "price": 15300
+            "price": 15300,
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Aerus_logo.png"
         },
         {
             "origin": "VVO",
@@ -50,7 +53,8 @@
             "arrival_time": "23:30",
             "carrier": "TK",
             "stops": 2,
-            "price": 11000
+            "price": 11000,
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Airworld_logo.png"
         },
         {
             "origin": "VVO",
@@ -63,7 +67,8 @@
             "arrival_time": "20:15",
             "carrier": "BA",
             "stops": 3,
-            "price": 13400
+            "price": 13400,
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/5/52/Caribbean_Airlines_logo.png"
         },
         {
             "origin": "VVO",
@@ -76,7 +81,8 @@
             "arrival_time": "19:25",
             "carrier": "SU",
             "stops": 3,
-            "price": 12450
+            "price": 12450,
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Air_Andorra_logo.png"
         },
         {
             "origin": "VVO",
@@ -89,7 +95,8 @@
             "arrival_time": "23:45",
             "carrier": "TK",
             "stops": 1,
-            "price": 13600
+            "price": 13600,
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Aerus_logo.png"
         },
         {
             "origin": "VVO",
@@ -102,7 +109,8 @@
             "arrival_time": "17:45",
             "carrier": "TK",
             "stops": 1,
-            "price": 33400
+            "price": 33400,
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Airworld_logo.png"
         },
         {
             "origin": "VVO",
@@ -115,7 +123,8 @@
             "arrival_time": "15:25",
             "carrier": "TK",
             "stops": 0,
-            "price": 14250
+            "price": 14250,
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Air_Andorra_logo.png"
         },
         {
             "origin": "LRN",
@@ -128,7 +137,8 @@
             "arrival_time": "14:30",
             "carrier": "SU",
             "stops": 1,
-            "price": 7000
+            "price": 7000,
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/5/52/Caribbean_Airlines_logo.png"
         },
         {
             "origin": "VVO",
@@ -141,7 +151,8 @@
             "arrival_time": "23:35",
             "carrier": "SU",
             "stops": 1,
-            "price": 16700
+            "price": 16700,
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Aerus_logo.png"
         },
         {
             "origin": "VVO",
@@ -154,7 +165,9 @@
             "arrival_time": "16:15",
             "carrier": "S7",
             "stops": 0,
-            "price": 17400
+            "price": 17400,
+            "logo": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Airworld_logo.png"
         }
-    ]
+    ],
+    "filters": ["0", "1", "2", "3", "all"]
 }

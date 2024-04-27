@@ -10,8 +10,10 @@ export interface ITicketData {
     carrier: string
     stops: number
     price: number
+    logo: string
 }
 
 export interface ITickets {
     tickets: ITicketData[]
+    filters: string[]
 }

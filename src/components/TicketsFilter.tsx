@@ -1,21 +1,27 @@
 import {
+    Box,
     Button,
     ButtonGroup,
     Checkbox,
     FormControlLabel,
     FormGroup,
     Paper,
+    Typography,
 } from '@mui/material'
 import { Dispatch, SetStateAction } from 'react'
 
 interface Props {
     setSelectedFilters: Dispatch<SetStateAction<string[]>>
     selectedFilters: string[]
+    setCurrency: Dispatch<SetStateAction<string>>
 }
 
-const TicketsFilter = ({ setSelectedFilters, selectedFilters }: Props) => {
+const TicketsFilter = ({
+    setSelectedFilters,
+    selectedFilters,
+    setCurrency,
+}: Props) => {
     const handleCheckboxChange = (filter: string) => {
-        console.log(selectedFilters)
         if (filter === 'all') {
             if (selectedFilters.includes('all')) {
                 setSelectedFilters(['0'])
@@ -24,7 +30,9 @@ const TicketsFilter = ({ setSelectedFilters, selectedFilters }: Props) => {
             }
         } else {
             if (selectedFilters.includes(filter)) {
-                setSelectedFilters(selectedFilters.filter((f) => f !== filter))
+                setSelectedFilters(
+                    selectedFilters.filter((f) => f !== filter && f !== 'all'),
+                )
             } else {
                 setSelectedFilters([...selectedFilters, filter])
             }
@@ -32,18 +40,44 @@ const TicketsFilter = ({ setSelectedFilters, selectedFilters }: Props) => {
     }
 
     return (
-        <Paper sx={{ p: 1 }}>
-            <div style={{ marginBottom: '20px' }}>
-                <p style={{ fontWeight: 'bold' }}> ВАЛЮТА</p>
+        <Paper
+            elevation={5}
+            sx={{
+                p: 1,
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: '10%',
+                textAlign: 'center',
+                width: '100%',
+                zIndex: 1,
+            }}
+        >
+            <Box sx={{ marginBottom: '20px' }}>
+                <Typography sx={{ fontWeight: 'bold' }}> ВАЛЮТА</Typography>
                 <ButtonGroup size="large" aria-label="Large button group">
-                    <Button key="ruble">RUB</Button>
-                    <Button key="usdollar">USD</Button>
-                    <Button key="euro">EUR</Button>
+                    <Button key="ruble" onClick={() => setCurrency('rub')}>
+                        RUB
+                    </Button>
+                    <Button key="usdollar" onClick={() => setCurrency('usd')}>
+                        USD
+                    </Button>
+                    <Button key="euro" onClick={() => setCurrency('eur')}>
+                        EUR
+                    </Button>
                 </ButtonGroup>
-            </div>
-            <div>
-                <p style={{ fontWeight: 'bold' }}>КОЛИЧЕСТВО ПЕРЕСАДОК</p>
-                <FormGroup>
+            </Box>
+            <Box>
+                <Typography style={{ fontWeight: 'bold' }}>
+                    КОЛИЧЕСТВО ПЕРЕСАДОК
+                </Typography>
+                <FormGroup
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                    }}
+                >
                     <FormControlLabel
                         control={
                             <Checkbox
@@ -57,11 +91,7 @@ const TicketsFilter = ({ setSelectedFilters, selectedFilters }: Props) => {
                     <FormControlLabel
                         control={
                             <Checkbox
-                                checked={
-                                    selectedFilters.includes('all') ||
-                                    (selectedFilters.includes('all') &&
-                                        selectedFilters.includes('0'))
-                                }
+                                checked={selectedFilters.includes('0')}
                                 onChange={() => handleCheckboxChange('0')}
                                 name="0"
                             />
@@ -71,10 +101,7 @@ const TicketsFilter = ({ setSelectedFilters, selectedFilters }: Props) => {
                     <FormControlLabel
                         control={
                             <Checkbox
-                                checked={
-                                    selectedFilters.includes('all') ||
-                                    selectedFilters.includes('1')
-                                }
+                                checked={selectedFilters.includes('1')}
                                 onChange={() => handleCheckboxChange('1')}
                                 name="1"
                             />
@@ -84,10 +111,7 @@ const TicketsFilter = ({ setSelectedFilters, selectedFilters }: Props) => {
                     <FormControlLabel
                         control={
                             <Checkbox
-                                checked={
-                                    selectedFilters.includes('all') ||
-                                    selectedFilters.includes('2')
-                                }
+                                checked={selectedFilters.includes('2')}
                                 onChange={() => handleCheckboxChange('2')}
                                 name="2"
                             />
@@ -97,10 +121,7 @@ const TicketsFilter = ({ setSelectedFilters, selectedFilters }: Props) => {
                     <FormControlLabel
                         control={
                             <Checkbox
-                                checked={
-                                    selectedFilters.includes('all') ||
-                                    selectedFilters.includes('3')
-                                }
+                                checked={selectedFilters.includes('3')}
                                 onChange={() => handleCheckboxChange('3')}
                                 name="3"
                             />
@@ -108,7 +129,7 @@ const TicketsFilter = ({ setSelectedFilters, selectedFilters }: Props) => {
                         label="3 пересадки"
                     />
                 </FormGroup>
-            </div>
+            </Box>
         </Paper>
     )
 }

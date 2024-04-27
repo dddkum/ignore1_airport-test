@@ -8,7 +8,85 @@
     box-sizing: border-box;
 }
 
-.flexColumn {
+button {
+    outline: none !important;
+}
+
+.flex-column {
     display: flex;
     flex-direction: column;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+.ticket__card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.airplane__icon {
+    rotate: 90deg;
+    position: absolute;
+    top: 50%;
+    right: -5px;
+    transform: translate(-50%, 0%);
+    &-container {
+        display: flex;
+        align-items: center;
+        width: 150px;
+        position: relative;
+    }
+    &-solid-line {
+        background-color: black;
+        height: 2px;
+        width: 100%;
+    }
+}
+
+.airplane__stops__count {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+}
+
+@media screen and (max-width: 900px) {
+    .ticket__card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .airplane__icon {
+        &-container {
+            width: 125px;
+        }
+    }
+
+    .mb-1 {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .airplane__icon {
+        &-container {
+            width: 80px;
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .airplane__icon {
+        &-container {
+            width: 50px;
+        }
+    }
 }

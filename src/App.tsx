@@ -1,36 +1,55 @@
 import '@/App.scss'
-import { CircularProgress, Container, Paper } from '@mui/material'
+import data from '@/data/tickets.json'
+import { Box, CircularProgress, Container } from '@mui/material'
 import TicketCard from '@/components/TicketCard.tsx'
-
-import bd from '@/data/tickets.json'
-import { ITickets } from '@/types/types.ts'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import { getFilteredTickets } from '@/utils/utils.ts'
 import TicketsFilter from '@/components/TicketsFilter.tsx'
 
 function App() {
-    const [ticketsData, setTicketsData] = useState<ITickets>(bd)
-    const [selectedFilters, setSelectedFilters] = useState<string[]>(['0'])
+    const [selectedFilters, setSelectedFilters] = useState(data.filters)
+    const [currencySelected, setCurrencySelected] = useState<string>('rub')
+
+    const filteredTickets = useMemo(
+        () => getFilteredTickets({ data: data.tickets, selectedFilters }),
+        [data, selectedFilters],
+    )
 
     return (
         <>
-            {ticketsData ? (
-                <Container
-                    maxWidth="xl"
-                    sx={{ display: 'flex', gap: '40px', py: 5 }}
-                >
-                    <TicketsFilter
-                        setSelectedFilters={setSelectedFilters}
-                        selectedFilters={selectedFilters}
-                    />
-                    <div>
-                        {ticketsData.tickets.map((ticket, index) => (
-                            <TicketCard
-                                id={index}
-                                ticket={ticket}
-                                selectedFilters={selectedFilters}
-                            />
-                        ))}
-                    </div>
+            <TicketsFilter
+                setSelectedFilters={setSelectedFilters}
+                selectedFilters={selectedFilters}
+                setCurrency={setCurrencySelected}
+            />
+            {data ? (
+                <Container maxWidth="xl" sx={{ paddingTop: '200px' }}>
+                    {selectedFilters.length > 0 ? (
+                        <Box>
+                            {filteredTickets.map((ticket, index) => (
+                                <TicketCard
+                                    key={index} // It's better to use a unique identifier for the key prop, like ticket.id
+                                    id={index}
+                                    ticket={ticket}
+                                    selectedFilters={selectedFilters}
+                                    currency={currencySelected}
+                                />
+                            ))}
+                        </Box>
+                    ) : (
+                        <Box>
+                            {/* Show all tickets when no filters are selected */}
+                            {data.tickets.map((ticket, index) => (
+                                <TicketCard
+                                    key={index} // It's better to use a unique identifier for the key prop, like ticket.id
+                                    id={index}
+                                    ticket={ticket}
+                                    selectedFilters={selectedFilters}
+                                    currency={currencySelected}
+                                />
+                            ))}
+                        </Box>
+                    )}
                 </Container>
             ) : (
                 <CircularProgress />
