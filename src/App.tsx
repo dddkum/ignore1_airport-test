@@ -1,35 +1,42 @@
+import '@/App.scss'
+import { CircularProgress, Container, Paper } from '@mui/material'
+import TicketCard from '@/components/TicketCard.tsx'
+
+import bd from '@/data/tickets.json'
+import { ITickets } from '@/types/types.ts'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import TicketsFilter from '@/components/TicketsFilter.tsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [ticketsData, setTicketsData] = useState<ITickets>(bd)
+    const [selectedFilters, setSelectedFilters] = useState<string[]>(['0'])
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <>
+            {ticketsData ? (
+                <Container
+                    maxWidth="xl"
+                    sx={{ display: 'flex', gap: '40px', py: 5 }}
+                >
+                    <TicketsFilter
+                        setSelectedFilters={setSelectedFilters}
+                        selectedFilters={selectedFilters}
+                    />
+                    <div>
+                        {ticketsData.tickets.map((ticket, index) => (
+                            <TicketCard
+                                id={index}
+                                ticket={ticket}
+                                selectedFilters={selectedFilters}
+                            />
+                        ))}
+                    </div>
+                </Container>
+            ) : (
+                <CircularProgress />
+            )}
+        </>
+    )
 }
 
 export default App
